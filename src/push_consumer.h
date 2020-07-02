@@ -107,7 +107,7 @@ class PushConsumer : public Php::Base{
         void setLogFileSizeAndNum(Php::Parameters &param);
  
   	//void setLogPath(const std::string& logPath);
-  	void setLogPath(Php::Parameters &param);
+  	//void setLogPath(Php::Parameters &param);
 
   	//const std::string& getGroupName() const;
   	Php::Value getGroupName();

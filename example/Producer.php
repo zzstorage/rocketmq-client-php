@@ -17,26 +17,29 @@
  */
 
 namespace RocketMQ;
-$instanceName = "MessageQueue";
+$instanceName = "helloproducerphp";
 
 $producer = new Producer($instanceName);
 $producer->setInstanceName($instanceName);
-$producer->setNamesrvAddr("127.0.0.1:9876");
+$producer->setNamesrvAddr("tmpmq.zhuaninc.com:9876;192.168.149.15:9876");
 $producer->setTcpTransportPullThreadNum(40);
 $producer->getTcpTransportConnectTimeout(100);
 $producer->setTcpTransportTryLockTimeout(1);
 $producer->start();
 
-$messageQueue = new MessageQueue("TopicTest", "", 1);
+//$messageQueue = new MessageQueue("topicInBrokerA", "", 1);
 
-for ($i = 0; $i < 100; $i ++){
-	$message = new Message("TopicTest", "*", "hello world $i");
+for ($i = 0; $i < 10; $i ++){
+	$message = new Message("topicInBrokerA", "tagA");
+	//$message = new Message("topicInBrokerA", "tagB", "hello world $i", "msg$i");
+	//$message = new Message("topicInBrokerA", "*", "hello world $i");
 	$sendResult = $producer->send($message);
 	printf("|%-30s|%-40s|\n", "msgId", $sendResult->getMsgId());
 	printf("|%-30s|%-40s|\n", "offsetMsgId", $sendResult->getOffsetMsgId());
 	printf("|%-30s|%-40s|\n", "sendStatus", $sendResult->getSendStatus());
+	printf("|%-30s|%-40s|\n", "queueId", $sendResult->getMessageQueue()->getQueueId());
 	printf("|%-30s|%-40s|\n", "queueOffset", $sendResult->getQueueOffset());
-    printf("|%-30s|%-40s|\n", "body", $message->getBody());
+    	printf("|%-30s|%-40s|\n", "body", $message->getBody());
 	echo "-------------------------------------------------------------------------\n";
 }
 

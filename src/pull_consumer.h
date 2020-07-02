@@ -82,27 +82,27 @@ class PullConsumer:public Php::Base
 		void setLogFileSizeAndNum(Php::Parameters &param);
 
 		//const std::string& getGroupName() const;
-		Php::Value getGroupName();
+		//Php::Value getGroupName();
 
 		//void setGroupName(const std::string& groupname);
-		void setGroupName(Php::Parameters &param);
+		//void setGroupName(Php::Parameters &param);
 
 
 		// const std::string& getNameSpace() const;
-		Php::Value getNameSpace();
+		//Php::Value getNameSpace();
 
 		//void setNameSpace(const std::string& nameSpace);
-		void setNameSpace(Php::Parameters &param);
+		//void setNameSpace(Php::Parameters &param);
 
 
 		//const std::string& getInstanceName() const;
-		Php::Value getInstanceName();
+		//Php::Value getInstanceName();
 
 		// std::string version()
-		Php::Value version();
+		//Php::Value version();
 
 		//void setLogPath(const std::string& logPath);
-		void setLogPath(Php::Parameters &logPath);
+		//void setLogPath(Php::Parameters &logPath);
 };
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace);

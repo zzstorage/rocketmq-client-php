@@ -339,7 +339,7 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 	producerClass.method<&Producer::getRetryTimes4Async>("getRetryTimes4Async");
 	producerClass.method<&Producer::setRetryTimes4Async>("setRetryTimes4Async", {Php::ByVal("times", Php::Type::Numeric), });
 
-	producerClass.method<&Producer::setLogPath>("setLogPath", {Php::ByVal("logPath", Php::Type::String), });
+	//producerClass.method<&Producer::setLogPath>("setLogPath", {Php::ByVal("logPath", Php::Type::String), });
 
 	producerClass.method<&Producer::getNameSpace>("getNameSpace");
 	producerClass.method<&Producer::setNameSpace>("setNameSpace", {Php::ByVal("nameSpace", Php::Type::String), });

@@ -71,6 +71,10 @@ void PullConsumer::setInstanceName(Php::Parameters &param){
     this->consumer->setInstanceName(instanceName);
 }
 
+/*Php::Value PullConsumer::getNameSpace(){
+    return this->consumer->getNameSpace();
+}*/
+
 void PullConsumer::setTopic(Php::Parameters &param){
     std::string topic = param[0];
     this->topicName= topic;
@@ -163,9 +167,9 @@ Php::Value PullConsumer::getLogLevel(){
     return this->consumer->getLogLevel();
 }
 
-void PullConsumer::setLogPath(Php::Parameters &param){
+/*void PullConsumer::setLogPath(Php::Parameters &param){
     this->consumer->setLogPath(param[0]);
-}
+}*/
 
 void PullConsumer::setLogFileSizeAndNum(Php::Parameters &param){
     this->consumer->setLogFileSizeAndNum(param[0], param[1]);
@@ -223,9 +227,9 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     pullConsumer.method<&PullConsumer::setLogLevel>("setLogLevel", {Php::ByVal("inputLevel", Php::Type::Numeric),});
     pullConsumer.method<&PullConsumer::getLogLevel>("getLogLevel");
     pullConsumer.method<&PullConsumer::setLogFileSizeAndNum>("setLogFileSizeAndNum", {Php::ByVal("fileNum", Php::Type::Numeric),Php::ByVal("perFileSize", Php::Type::Numeric),});
-   pullConsumer.method<&PullConsumer::setLogPath>("setLogPath", {Php::ByVal("logPath", Php::Type::String),});
+   //pullConsumer.method<&PullConsumer::setLogPath>("setLogPath", {Php::ByVal("logPath", Php::Type::String),});
 
-   pullConsumer.method<&PullConsumer::setNameSpace>("setNameSpace", {Php::ByVal("nameSpace", Php::Type::String),});
+   /*pullConsumer.method<&PullConsumer::setNameSpace>("setNameSpace", {Php::ByVal("nameSpace", Php::Type::String),});
    pullConsumer.method<&PullConsumer::getNameSpace>("getNameSpace");
 
    pullConsumer.method<&PullConsumer::getGroupName>("getGroupName");
@@ -233,7 +237,7 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
 
    pullConsumer.method<&PullConsumer::getInstanceName>("getInstanceName");
 
-   pullConsumer.method<&PullConsumer::version>("version");
+   pullConsumer.method<&PullConsumer::version>("version");*/
 
     rocketMQNamespace.add(pullConsumer);
 }

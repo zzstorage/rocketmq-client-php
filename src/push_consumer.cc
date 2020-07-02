@@ -211,10 +211,10 @@ Php::Value PushConsumer::version(){
 	return this->consumer->version();
 }
 
-void PushConsumer::setLogPath(Php::Parameters &param){
+/*void PushConsumer::setLogPath(Php::Parameters &param){
 	std::string logPath = param[0];
 	this->consumer->setLogPath(logPath);
-}
+}*/
 
 void PushConsumer::setMaxReconsumeTimes(Php::Parameters &param){
 	this->consumer->setMaxReconsumeTimes((int)param[0]);
@@ -311,7 +311,7 @@ void registerPushConsumer(Php::Namespace &rocketMQNamespace){
 	pushConsumer.method<&PushConsumer::setNameSpace>("setNameSpace", {Php::ByVal("space", Php::Type::Numeric),});
 	pushConsumer.method<&PushConsumer::version>("version");
 
-	pushConsumer.method<&PushConsumer::setLogPath>("setLogPath", {Php::ByVal("logPath", Php::Type::String), });
+	//pushConsumer.method<&PushConsumer::setLogPath>("setLogPath", {Php::ByVal("logPath", Php::Type::String), });
 
 	pushConsumer.method<&PushConsumer::setMaxReconsumeTimes>("setMaxReconsumeTimes", {Php::ByVal("maxReconsumeTimes", Php::Type::Numeric), });
 	pushConsumer.method<&PushConsumer::getMaxReconsumeTimes>("getMaxReconsumeTimes");

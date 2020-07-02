@@ -142,10 +142,10 @@ class Producer : public Php::Base
 		}
 
   		// void setLogPath(const std::string& logPath);
-  		void setLogPath(Php::Parameters &param){
+  		/*void setLogPath(Php::Parameters &param){
 			std::string logPath = param[0];
 			this->producer->setLogPath(logPath);
-		}
+		}*/
 
   		// const std::string& getNameSpace() const;
   		Php::Value getNameSpace(){
