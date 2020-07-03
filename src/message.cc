@@ -22,16 +22,23 @@ Message::Message(rocketmq::MQMessage &message){
 }
 
 void Message::__construct(Php::Parameters &params){
+    if(params.size() < 2){
+        this->message = rocketmq::MQMessage();
+        return;
+    }
+
     std::string topic = params[0];
-    std::string tags = params[1];
     if (params.size() == 2){
-        this->message = rocketmq::MQMessage(topic, tags);
+        std::string body = params[1];
+        this->message = rocketmq::MQMessage(topic, body);
     }else if (params.size() == 3){
+        std::string tags = params[1];
         std::string body = params[2];
         this->message = rocketmq::MQMessage(topic, tags, body);
     }else if (params.size() == 4){
-        std::string body = params[2];
-        std::string keys = params[3];
+        std::string tags = params[1];
+        std::string keys = params[2];
+        std::string body = params[3];
         this->message = rocketmq::MQMessage(topic, tags, keys, body);
     }/*else if (params.size() == 6){
        std::string keys = params[2];

@@ -21,20 +21,21 @@ function echo_msg($msg_ext){
     $msg = $msg_ext->getMessage();
     $arr = array(
         "msgId" => $msg_ext->getMsgId(),
+        "offsetMsgId" => $msg_ext->getOffsetMsgId(),
         "topic" => $msg->getTopic(),
         "tags" => $msg->getTags(),
-	"bornHostString" => $msg_ext->getBornHostString(),
-        "storeHostString" => $msg_ext->getStoreHostString(),
-        "bornTimestamp" => $msg_ext->getBornTimestamp(),
-        "offsetMsgId" => $msg_ext->getOffsetMsgId(),
-        "bodyCRC" => $msg_ext->getBodyCRC(),
-	"queueId" => $msg_ext->getQueueId(),
+        "keys" => $msg->getKeys(),
+        "queueId" => $msg_ext->getQueueId(),
         "queueOffset" => $msg_ext->getQueueOffset(),
+        "bornHost" => $msg_ext->getBornHostString(),
+        "storeHost" => $msg_ext->getStoreHostString(),
+        "bornTimestamp" => $msg_ext->getBornTimestamp(),
+        "storeTimestamp" => $msg_ext->getStoreTimestamp(),
+        "bodyCRC" => $msg_ext->getBodyCRC(),
         "commitLogOffset" => $msg_ext->getCommitLogOffset(),
         "storeSize" => $msg_ext->getStoreSize(),
         "reconsumeTimes" => $msg_ext->getReconsumeTimes(),
         "preparedTransactionOffset" => $msg_ext->getPreparedTransactionOffset(),
-        "keys" => $msg->getKeys(),
         "delayTimeLevel" => $msg->getDelayTimeLevel(),
         "isWaitStoreMsgOK" => $msg->isWaitStoreMsgOK() ? "true" : "false",
         "flag" => $msg->getFlag(),
@@ -44,8 +45,14 @@ function echo_msg($msg_ext){
     );
     
     foreach($arr as $key => $val){
-        printf("|%-30s|%-40s|\n", $key, $val);
+        printf("%s: %s, ", $key, $val);
     }
-    echo "-------------------------------------------------------------------------\n";
+
+    printf("properties: [")
+    $properties = $msg->getProperties();
+    foreach($properties as $key => $val) {
+        printf("%s: %s, ", $key, $val);
+    }
+    printf("]\n");
 }
 

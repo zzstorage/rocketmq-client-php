@@ -37,7 +37,8 @@ $consumer->setCallback(function ($msg) use (&$count){
     $count ++;
     echo $count;
 });
-$consumer->subscribe("topicInBrokerA", "*");
+$consumer->subscribe("topicInBrokerA", "tagA");
+$consumer->subscribe("helloworld", "*");
 $consumer->start();
 $consumer->shutdown();
 

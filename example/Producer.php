@@ -29,18 +29,28 @@ $producer->start();
 
 //$messageQueue = new MessageQueue("topicInBrokerA", "", 1);
 
+$topicName = "topicInBrokerA";
 for ($i = 0; $i < 10; $i ++){
-	$message = new Message("topicInBrokerA", "tagA");
-	//$message = new Message("topicInBrokerA", "tagB", "hello world $i", "msg$i");
-	//$message = new Message("topicInBrokerA", "*", "hello world $i");
+    //$message = new Message();
+    //$message->setTopic($topicName);
+	$message = new Message($topicName, "hello world $i");
+	//$message = new Message($topicName, "tagA", "hello world $i");
+	//$message = new Message($topicName, "tagB", "msg$i", "hello world $i");
+	//$message.setProperty("message no", "$i+1");
+	//$message.setProperty("property", "value");
+    $properties = array(
+        "message no" => "$i+1",
+        "property" => "value",
+    );
+    $message.setProperties($properties);
 	$sendResult = $producer->send($message);
-	printf("|%-30s|%-40s|\n", "msgId", $sendResult->getMsgId());
-	printf("|%-30s|%-40s|\n", "offsetMsgId", $sendResult->getOffsetMsgId());
-	printf("|%-30s|%-40s|\n", "sendStatus", $sendResult->getSendStatus());
-	printf("|%-30s|%-40s|\n", "queueId", $sendResult->getMessageQueue()->getQueueId());
-	printf("|%-30s|%-40s|\n", "queueOffset", $sendResult->getQueueOffset());
-    	printf("|%-30s|%-40s|\n", "body", $message->getBody());
-	echo "-------------------------------------------------------------------------\n";
+	printf("topic: %s, ",       $message->getTopic());
+	printf("msgId: %s, ",       $sendResult->getMsgId());
+	printf("offsetMsgId: %s, ", $sendResult->getOffsetMsgId());
+	printf("sendStatus: %s, ",  $sendResult->getSendStatus());
+	printf("queueId: %s, ",     $sendResult->getMessageQueue()->getQueueId());
+	printf("queueOffset: %s, ", $sendResult->getQueueOffset());
+    printf("body: %s\n",        $message->getBody());
 }
 
 $producer->shutdown();
