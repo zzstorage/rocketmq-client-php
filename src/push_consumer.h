@@ -54,7 +54,7 @@ class PushConsumer : public Php::Base{
 
         void setListenerType(Php::Parameters &param);
 
-        void setThreadCount(Php::Parameters &param);
+        //void setThreadCount(Php::Parameters &param);
 
         void subscribe(Php::Parameters &param);
 
@@ -149,7 +149,7 @@ class PushConsumer : public Php::Base{
   	Php::Value getMaxReconsumeTimes();
 
   	// void setConsumeThreadCount(int threadCount);
-  	void setConsumeThreadCount(Php::Parameters &param);
+  	//void setConsumeThreadCount(Php::Parameters &param);
 
   	// int getConsumeThreadCount() const;
   	Php::Value getConsumeThreadCount();

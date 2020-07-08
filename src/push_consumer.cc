@@ -52,9 +52,9 @@ void PushConsumer::setConnectTimeout(Php::Parameters &param){
 	this->consumer->setTcpTransportConnectTimeout((int64_t)param[0]);
 }
 
-void PushConsumer::setThreadCount(Php::Parameters &param){
+/*void PushConsumer::setThreadCount(Php::Parameters &param){
 	this->consumer->setConsumeThreadCount((int64_t)param[0]);
-}
+}*/
 
 Php::Value PushConsumer::getConsumeFromWhere(){
 	return (int) this->consumer->getConsumeFromWhere();
@@ -120,6 +120,7 @@ void PushConsumer::shutdown(){
 void PushConsumer::__construct(Php::Parameters &params){
 	std::string groupName = params[0];
 	this->consumer = new rocketmq::DefaultMQPushConsumer(groupName);
+        this->consumer->setConsumeThreadCount(1);
 }
 
 void PushConsumer::setSessionCredentials(Php::Parameters &param){
@@ -268,7 +269,7 @@ void registerPushConsumer(Php::Namespace &rocketMQNamespace){
 	pushConsumer.method<&PushConsumer::setInstanceName>("setInstanceName", 		{ Php::ByVal("groupName", Php::Type::String), });
 	pushConsumer.method<&PushConsumer::setTryLockTimeout>("setTryLockTimeout", 	{Php::ByVal("tryLockTimeout", Php::Type::Numeric),});
 	pushConsumer.method<&PushConsumer::setConnectTimeout>("setConnectTimeout", 	{Php::ByVal("connectTimeout", Php::Type::Numeric),});
-	pushConsumer.method<&PushConsumer::setThreadCount>("setThreadCount", 		{Php::ByVal("threadCount", Php::Type::Numeric),});
+	//pushConsumer.method<&PushConsumer::setThreadCount>("setThreadCount", 		{Php::ByVal("threadCount", Php::Type::Numeric),});
 	pushConsumer.method<&PushConsumer::setListenerType>("setListenerType", 		{Php::ByVal("listenerType", Php::Type::Numeric), });
 	pushConsumer.method<&PushConsumer::getConsumeFromWhere>("getConsumeFromWhere");
 	pushConsumer.method<&PushConsumer::setConsumeFromWhere>("setConsumeFromWhere", { Php::ByVal("consumeFromWhere", Php::Type::Numeric), });

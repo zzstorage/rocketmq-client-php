@@ -22,11 +22,6 @@ Message::Message(rocketmq::MQMessage &message){
 }
 
 void Message::__construct(Php::Parameters &params){
-    if(params.size() < 2){
-        this->message = rocketmq::MQMessage();
-        return;
-    }
-
     std::string topic = params[0];
     if (params.size() == 2){
         std::string body = params[1];
@@ -162,6 +157,7 @@ Php::Value Message::getProperties(){
     std::map<std::string, std::string>::iterator iter = this->message.getProperties().begin();
 
     for (; iter != this->message.getProperties().end(); iter ++){
+	//printf("property %s: %s\n", iter->first.c_str(), iter->second.c_str());
         result[iter->first] = result[iter->second];
     }
 
