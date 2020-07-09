@@ -24,7 +24,7 @@ include("Message.php");
 $consumer = new PushConsumer("hello_groupnamezzy91");
 $consumer->setInstanceName("instance");
 $consumer->setNamesrvAddr("tmpmq.zhuaninc.com:9876;192.168.149.15:9876");
-$consumer->setThreadCount(1);
+//$consumer->setThreadCount(1);
 //$consumer->setLogPath("/home/work");
 //$consumer->setListenerType(MessageListenerType::LISTENER_ORDERLY);
 //$consumer->setConsumeFromWhere(ConsumeFromWhere::CONSUME_FROM_FIRST_OFFSET);
@@ -33,9 +33,10 @@ $result = array();
 $count = 0;
 // if thread > 1 & use echo method will core dump.
 $consumer->setCallback(function ($msg) use (&$count){
-    echo_msg($msg);
     $count ++;
-    echo $count;
+    echo date("Y-m-d H:i:s");
+    echo " receive mesage $count, ";
+    echo_msg($msg);
 });
 $consumer->subscribe("topicInBrokerA", "tagA");
 $consumer->subscribe("helloworld", "*");

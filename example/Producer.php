@@ -30,19 +30,20 @@ $producer->start();
 //$messageQueue = new MessageQueue("topicInBrokerA", "", 1);
 
 $topicName = "topicInBrokerA";
-for ($i = 0; $i < 10; $i ++){
-    //$message = new Message();
-    //$message->setTopic($topicName);
-	$message = new Message($topicName, "hello world $i");
-	//$message = new Message($topicName, "tagA", "hello world $i");
-	//$message = new Message($topicName, "tagB", "msg$i", "hello world $i");
-	//$message.setProperty("message no", "$i+1");
-	//$message.setProperty("property", "value");
-    $properties = array(
-        "message no" => "$i+1",
-        "property" => "value",
-    );
-    $message.setProperties($properties);
+for ($i = 0; $i < 20; $i ++){
+    $message = new Message($topicName, "hello world $i");
+    $message->setTags("tagA");
+    //$message = new Message($topicName, "tagA", "hello world $i");
+    //$message = new Message($topicName, "tagA", "msg$i", "hello world $i");
+    $message->setProperty("message no", "$i+1");
+    $message->setProperty("property", "value");
+    //$message->setDelayTimeLevel($i+1);
+    //$properties = array(
+    //    "message no" => "$i+1",
+    //    "property" => "value",
+    //);
+    //below function will overwrite tag and keys
+    //$message->setProperties($properties);
 	$sendResult = $producer->send($message);
 	printf("topic: %s, ",       $message->getTopic());
 	printf("msgId: %s, ",       $sendResult->getMsgId());
@@ -51,6 +52,7 @@ for ($i = 0; $i < 10; $i ++){
 	printf("queueId: %s, ",     $sendResult->getMessageQueue()->getQueueId());
 	printf("queueOffset: %s, ", $sendResult->getQueueOffset());
     printf("body: %s\n",        $message->getBody());
+    //usleep(500000);
 }
 
 $producer->shutdown();

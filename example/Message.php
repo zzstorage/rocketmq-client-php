@@ -41,18 +41,19 @@ function echo_msg($msg_ext){
         "flag" => $msg->getFlag(),
         "sysFlag" => $msg->getSysFlag(),
         "body" => substr($msg->getBody(),0,40),
-
     );
     
     foreach($arr as $key => $val){
         printf("%s: %s, ", $key, $val);
-    }
+    };
 
-    printf("properties: [")
+    printf("properties: [");
     $properties = $msg->getProperties();
+    printf("property: %s, ", $msg->getProperty("property"));
+    printf("message no: %s, ", $msg->getProperty("message no"));
     foreach($properties as $key => $val) {
         printf("%s: %s, ", $key, $val);
-    }
+    };
     printf("]\n");
 }
 
