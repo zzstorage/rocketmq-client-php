@@ -148,19 +148,9 @@ Php::Value Message::getTransactionId() {
     return this->message.getTransactionId();
 }
 
-
-
-
 // std::map<std::string, std::string> getProperties() const;
 Php::Value Message::getProperties(){
-    Php::Array result;
-    std::map<std::string, std::string>::iterator iter = this->message.getProperties().begin();
-
-    for (; iter != this->message.getProperties().end(); iter ++){
-	//printf("property %s: %s\n", iter->first.c_str(), iter->second.c_str());
-        result[iter->first] = result[iter->second];
-    }
-
+    Php::Array result(this->message.getProperties());
     return result;
 }
 

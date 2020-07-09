@@ -35,9 +35,9 @@ for ($i = 0; $i < 20; $i ++){
     $message->setTags("tagA");
     //$message = new Message($topicName, "tagA", "hello world $i");
     //$message = new Message($topicName, "tagA", "msg$i", "hello world $i");
-    $message->setProperty("message no", "$i+1");
+    $message->setProperty("message no", "$i");
     $message->setProperty("property", "value");
-    //$message->setDelayTimeLevel($i+1);
+    $message->setDelayTimeLevel($i+1);
     //$properties = array(
     //    "message no" => "$i+1",
     //    "property" => "value",

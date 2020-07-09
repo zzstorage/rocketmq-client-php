@@ -49,8 +49,8 @@ function echo_msg($msg_ext){
 
     printf("properties: [");
     $properties = $msg->getProperties();
-    printf("property: %s, ", $msg->getProperty("property"));
-    printf("message no: %s, ", $msg->getProperty("message no"));
+    //printf("property: %s, ", $msg->getProperty("property"));
+    //printf("message no: %s, ", $msg->getProperty("message no"));
     foreach($properties as $key => $val) {
         printf("%s: %s, ", $key, $val);
     };
