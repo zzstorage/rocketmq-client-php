@@ -21,6 +21,10 @@ MessageQueue::MessageQueue(rocketmq::MQMessageQueue *other){
     this->messageQueue = other;
 }
 
+MessageQueue::MessageQueue(const rocketmq::MQMessageQueue &other){
+    this->messageQueue = new rocketmq::MQMessageQueue(other);
+}
+
 void MessageQueue::__construct(Php::Parameters &params){
     std::string topic = params[0];
     std::string brokerName = params[1];

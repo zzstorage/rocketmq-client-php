@@ -22,7 +22,7 @@ namespace RocketMQ;
 include("Message.php");
 
 $consumer = new PushConsumer("hello_groupnamezzy91");
-$consumer->setInstanceName("instance");
+//$consumer->setInstanceName("instance");
 $consumer->setNamesrvAddr("tmpmq.zhuaninc.com:9876;192.168.149.15:9876");
 //$consumer->setThreadCount(1);
 //$consumer->setLogPath("/home/work");

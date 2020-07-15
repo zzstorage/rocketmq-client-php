@@ -31,8 +31,7 @@ Php::Value SendResult::getSendStatus(){
 }
 
 Php::Value SendResult::getMessageQueue(){
-	rocketmq::MQMessageQueue mq = this->sendResult.getMessageQueue();
-	return Php::Object(MESSAGE_QUEUE_CLASS_NAME, new MessageQueue(&mq));
+	return Php::Object(MESSAGE_QUEUE_CLASS_NAME, new MessageQueue(this->sendResult.getMessageQueue()));
 }
 
 Php::Value SendResult::getQueueOffset(){

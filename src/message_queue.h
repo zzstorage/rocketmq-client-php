@@ -35,7 +35,8 @@ class MessageQueue : public Php::Base
 		}
 		virtual ~MessageQueue(){			
 		}
-		MessageQueue(rocketmq::MQMessageQueue* other);
+                MessageQueue(rocketmq::MQMessageQueue *other);
+		MessageQueue(const rocketmq::MQMessageQueue &other);
 		void __construct(Php::Parameters &params);
 
 		Php::Value getTopic();
@@ -53,9 +54,9 @@ class MessageQueue : public Php::Base
 
 
 		virtual void __destruct(){
-//			if (this->messageQueue != nullptr) {
-//				delete(this->messageQueue);
-//			}
+			if (this->messageQueue != nullptr) {
+				delete(this->messageQueue);
+			}
 		}
 };
 

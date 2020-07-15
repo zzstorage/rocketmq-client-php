@@ -20,11 +20,11 @@ namespace RocketMQ;
 $instanceName = "helloproducerphp";
 
 $producer = new Producer($instanceName);
-$producer->setInstanceName($instanceName);
+//$producer->setInstanceName($instanceName);
 $producer->setNamesrvAddr("tmpmq.zhuaninc.com:9876;192.168.149.15:9876");
-$producer->setTcpTransportPullThreadNum(40);
-$producer->getTcpTransportConnectTimeout(100);
-$producer->setTcpTransportTryLockTimeout(1);
+//$producer->setTcpTransportPullThreadNum(40);
+//$producer->getTcpTransportConnectTimeout(100);
+//$producer->setTcpTransportTryLockTimeout(1);
 $producer->start();
 
 //$messageQueue = new MessageQueue("topicInBrokerA", "", 1);
@@ -37,7 +37,7 @@ for ($i = 0; $i < 20; $i ++){
     //$message = new Message($topicName, "tagA", "msg$i", "hello world $i");
     $message->setProperty("message no", "$i");
     $message->setProperty("property", "value");
-    $message->setDelayTimeLevel($i+1);
+    //$message->setDelayTimeLevel($i+1);
     //$properties = array(
     //    "message no" => "$i+1",
     //    "property" => "value",
@@ -49,6 +49,7 @@ for ($i = 0; $i < 20; $i ++){
 	printf("msgId: %s, ",       $sendResult->getMsgId());
 	printf("offsetMsgId: %s, ", $sendResult->getOffsetMsgId());
 	printf("sendStatus: %s, ",  $sendResult->getSendStatus());
+	printf("brokerName: %s, ",  $sendResult->getMessageQueue()->getBrokerName());
 	printf("queueId: %s, ",     $sendResult->getMessageQueue()->getQueueId());
 	printf("queueOffset: %s, ", $sendResult->getQueueOffset());
     printf("body: %s\n",        $message->getBody());
